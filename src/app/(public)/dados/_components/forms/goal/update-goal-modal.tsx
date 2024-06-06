@@ -4,89 +4,74 @@ import { Drop, Lightning } from '@phosphor-icons/react';
 import { useContext, useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import { Fieldset } from '../../create-new-account-modal-fieldset';
+import { Fieldset } from '../account/create-new-account-modal-fieldset';
 import { MapContext } from '@/contexts/MapContext';
 import { Button } from '@/components/UI/Button';
 
-const AccountForm = () => {
+const GoalForm = () => {
 
-    const { accountType, user, modalIsOpen, setModalIsOpen } = useContext(MapContext);
+    const { accountType, user, editGoalModalIsOpen, setEditGoalModalIsOpen } = useContext(MapContext);
     const [date, setDate] = useState(new Date());
-    const [consumption, setConsumption] = useState('');
-    const [bill, setBill] = useState('');
+    const [billGoal, setBillGoal] = useState('');
+    const [goalConsu, setGoalConsu] = useState('');
 
-    const handleSubmit = (event: any) => {
-        event.preventDefault();
-
-        const formattedDate = date.toISOString();
-
-        if (user?.cnpj) {
+    const handleSubmit = () => {
+       
+        if (user) {
             const data = {
-                referenceDate: formattedDate,
-                consumption: parseFloat(consumption),
-                billAmount: parseFloat(bill),
-                accountType,
-                cnpj: user.cnpj
+                idEnterprise: user.id,
+                cnpjEnterprise: user.cnpj,
+                consumptionGoal: parseFloat(goalConsu),
+                billGoal: parseFloat(billGoal)
+              
             };
-
-            fetch(`http://127.0.0.1:8080/account/${accountType}/create`, {
-                method: 'POST',
+            console.log(data)
+            fetch(`http://127.0.0.1:8080/goals/update/${accountType}`, {
+                method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(data)
-            }).then(response => response.json())
+            }).then(async response => await response.json())
                 .then(data => {
-                    setModalIsOpen(!modalIsOpen)
-                    console.log('Success:', data);
+                    setEditGoalModalIsOpen(!editGoalModalIsOpen)
                 }).catch((error) => {
                     alert(error)
                     console.error('Error:', error);
                 });
         }
+
+        
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-             <label>Tipo de Conta: {accountType}</label>
+        <div className='px-5 py-3'>
+             <label>Tipo de Meta: {accountType}</label>
             <div className='flex items-center justify-center'>
                 < Fieldset />
-                
             </div>
-            <div className='py-3 flex flex-col'>
-                <label>Data de Referência</label>
-                
-                    <DatePicker
-                        selected={date}
-                        onChange={(date: Date) => setDate(date)}
-                        dateFormat="yyyy-MM-dd"
-                        showIcon
-                        className='dark:bg-gray-200 w-full rounded-sm'
-                    />
-             
-
-            </div>
+          
             <div className='py-3'>
                 <InputFloatLabel
                     label='Consumo'
                     type='number'
-                    value={consumption}
-                    onChange={e => setConsumption(e.target.value)}
+                    value={goalConsu}
+                    onChange={e => setGoalConsu(e.target.value)}
                     state={true}
                 />
             </div>
             <div className='py-3'>
                 <InputFloatLabel
-                    label='Valor da Conta (R$)'
+                    label='Valor (R$)'
                     type='number'
-                    value={bill}
-                    onChange={e => setBill(e.target.value)}
+                    value={billGoal}
+                    onChange={e => setBillGoal(e.target.value)}
                     state={true}
                 />
             </div>
-            <Button Title='Salvar Conta' onClick={handleSubmit}/>
-        </form>
+            <Button Title='Salvar Meta' onClick={handleSubmit}/>
+        </div>
     );
 };
 
-export default AccountForm;
+export default GoalForm;

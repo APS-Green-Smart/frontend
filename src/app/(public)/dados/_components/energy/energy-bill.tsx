@@ -5,7 +5,7 @@ import { Modal } from '@/components/UI/modal-root';
 import { MapContext } from '@/contexts/MapContext';
 import { useContext, useState, useEffect } from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-import AccountForm from '../create-new-account-modal';
+import AccountForm from '../forms/account/create-new-account-modal';
 import { Ilustration } from '@/components/animations/animated-components/Ilustration';
 
 interface Account {
@@ -38,7 +38,7 @@ const EnergyConsumptionAndBillChart = () => {
   return (
     <>
 
-      <div>
+       
         {showMessage ? (
           <div className="text-center text-red-500 max-w-lg m-auto pb-5">
             <p className='py-4'>É necessário pelo menos três contas para visualizar o gráfico.</p>
@@ -64,10 +64,10 @@ const EnergyConsumptionAndBillChart = () => {
             </>
           )}
  
-      </div>
+     
 
       {modalIsOpen && (
-        <Modal title="Cadastrar nova conta" onClose={() => setModalIsOpen(!setModalIsOpen)}>
+        <Modal title="Cadastrar nova conta" onClose={() => setModalIsOpen(!modalIsOpen)} visible={modalIsOpen}>
           <AccountForm />
         </Modal>
       )}

@@ -6,8 +6,9 @@ import { MapContext } from '@/contexts/MapContext';
 import { useContext, useEffect, useState } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
  
-import AccountForm from '../create-new-account-modal';
+import AccountForm from '../forms/account/create-new-account-modal';
 import { Ilustration } from '@/components/animations/animated-components/Ilustration';
+import GoalForm from '../forms/goal/update-goal-modal';
 
 interface Account {
     date: string;
@@ -20,7 +21,7 @@ interface Account {
 }
 
 const WaterConsumptionAndBillGoalsChart = () => {
-    const { waterAccounts, modalIsOpen, setModalIsOpen } = useContext(MapContext);
+    const { waterAccounts, modalIsOpen, setModalIsOpen, setEditGoalModalIsOpen, editGoalModalIsOpen } = useContext(MapContext);
 
     const [data, setData] = useState<Account[]>([]);
     const [showMessage, setShowMessage] = useState(false);
@@ -38,6 +39,7 @@ const WaterConsumptionAndBillGoalsChart = () => {
 
             const hasZeroGoals = waterAccounts.some(account => account.consumptionGoal === 0 || account.billGoal === 0);
             if (hasZeroGoals) {
+                alert(hasZeroGoals)
                 setShowGoalMessage(true);
             } else {
                 setShowGoalMessage(false);
@@ -47,7 +49,7 @@ const WaterConsumptionAndBillGoalsChart = () => {
 
     return (
         <>
-            <div>
+            
                 {showMessage ? (
                     <div className="text-center text-red-500 max-w-lg m-auto pb-5">
                         <p className='py-4'>É necessário pelo menos três contas para visualizar o gráfico.</p>
@@ -57,7 +59,8 @@ const WaterConsumptionAndBillGoalsChart = () => {
                 ) : showGoalMessage ? (
                     <div className="text-center text-red-500 max-w-lg m-auto pb-5">
                         <p className='py-4'>Algumas metas de consumo ou valor estão zeradas. Atualize as metas para visualizar o gráfico.</p>
-                        <Button Title='Editar metas' onClick={() => setModalIsOpen(!modalIsOpen)} />
+                        <Button Title='Editar metas' onClick={() => setEditGoalModalIsOpen(!editGoalModalIsOpen)} />
+                        <Ilustration person='water-goal' typeAnimation='fromTheBotton'/>
                     </div>
                 ) : (
                     <ResponsiveContainer width="100%" height={400}>
@@ -74,11 +77,10 @@ const WaterConsumptionAndBillGoalsChart = () => {
                         </LineChart>
                     </ResponsiveContainer>
                 )}
-            </div>
-
-            {modalIsOpen && (
-                <Modal title="Editar Metas" onClose={() => setModalIsOpen(!modalIsOpen)}>
-                    <AccountForm />
+            
+            {editGoalModalIsOpen && (
+                <Modal title="Editar Metas" onClose={() => setEditGoalModalIsOpen(!editGoalModalIsOpen)} visible={editGoalModalIsOpen}>
+                    <GoalForm />
                 </Modal>
             )}
         </>

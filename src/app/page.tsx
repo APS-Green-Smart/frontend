@@ -49,35 +49,7 @@ export default function Home() {
         <Article />
         <Ilustration person="math" typeAnimation="fromTheBotton" />
       </section >
-
-      {/* <section className="min-h-screen relative bg-black-custom max-lg:py-10" id="map">
-        <section className="min-h-[100dvh] flex flex-col gap-10 relative  ">
-          <aside className="flex justify-center lg:py-8 xl:items-center px-3">
-            <aside className='w-full lg:max-w-4xl lg:px-3 lg:max-xl:m-auto '>
-              <MapNav />
-            </aside>
-            <figure className="max-lg:hidden lg:flex lg:justify-end lg:items-center">
-              <Ilustration person="allef" typeAnimation="fromTheBotton" />
-            </figure>
-          </aside>
-          <Map />
-          <figure className="px-3 flex flex-col items-center gap-8 lg:hidden ">
-            <Ilustration person="allef" typeAnimation="fromTheBotton" />
-          </figure>
-        </section>
-      </section> */}
-
-      {/* <section className="min-h-screen bg-default" id="info">
-        <aside className="container m-auto px-3 lg:px-8 pt-20">
-          <h2 className="text-2xl text-black-custom font-bold lg:pb-16">Confira as informações da sua rota</h2>
-          <RouteInfo />
-        </aside>
-
-        <aside className="container m-auto px-3 lg:px-8 pt-20">
-          <h2 className="text-2xl text-black-custom font-bold">O que seria necessário para repor o impacto?</h2>
-          <RouteImpact />
-        </aside>
-      </section> */}
+ 
     </>
   )
 }

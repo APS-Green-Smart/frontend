@@ -5,7 +5,7 @@ import { Modal } from '@/components/UI/modal-root';
 import { MapContext } from '@/contexts/MapContext';
 import { useContext, useState, useEffect } from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-import AccountForm from '../create-new-account-modal';
+import AccountForm from '../forms/account/create-new-account-modal';
 import { Ilustration } from '@/components/animations/animated-components/Ilustration';
 
 interface Account {
@@ -37,7 +37,7 @@ const WaterConsumptionAndBillChart = () => {
 
   return (
     <>
-      <div>
+    
         {showMessage ? (
           <div className="text-center text-red-500 max-w-lg m-auto pb-5">
             <p className='py-4'>É necessário pelo menos três contas para visualizar o gráfico.</p>
@@ -45,7 +45,7 @@ const WaterConsumptionAndBillChart = () => {
             <Ilustration person='no-water' typeAnimation='fromTheBotton' />
           </div>
         ) : (
-          <>
+          
             <ResponsiveContainer width="100%" height={400}>
               <BarChart data={data} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
                 <CartesianGrid strokeDasharray="3 3" />
@@ -58,12 +58,12 @@ const WaterConsumptionAndBillChart = () => {
                 <Bar yAxisId="right" dataKey="bill" fill="#82ca9d" name="Valor da Conta (R$)" />
               </BarChart>
             </ResponsiveContainer>
-          </>
+         
         )}
-      </div>
+      
 
       {modalIsOpen && (
-        <Modal title="Cadastrar nova conta" onClose={() => setModalIsOpen(!modalIsOpen)}>
+        <Modal title="Cadastrar nova conta" onClose={() => setModalIsOpen(!modalIsOpen)} visible={modalIsOpen}>
           <AccountForm />
         </Modal>
       )}

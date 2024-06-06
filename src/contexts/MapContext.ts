@@ -14,8 +14,10 @@ interface Account {
 }
 
 interface User {
-    email: string;
-    cnpj: string;
+        id: string,
+        companyName: string,
+        cnpj: string,
+        email: string
 }
 
 interface MapValues {
@@ -31,6 +33,8 @@ interface MapValues {
     energyAccounts: Account[] | null
     modalIsOpen: boolean
     setModalIsOpen: Dispatch<SetStateAction<boolean>>
+    editGoalModalIsOpen: boolean
+    setEditGoalModalIsOpen: Dispatch<SetStateAction<boolean>>
 }
 
 

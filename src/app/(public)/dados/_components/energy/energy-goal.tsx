@@ -5,8 +5,9 @@ import { Modal } from '@/components/UI/modal-root';
 import { MapContext } from '@/contexts/MapContext';
 import { useContext, useState, useEffect } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-import AccountForm from '../create-new-account-modal';
+import AccountForm from '../forms/account/create-new-account-modal';
 import { Ilustration } from '@/components/animations/animated-components/Ilustration';
+import GoalForm from '../forms/goal/update-goal-modal';
 
 
 interface Account {
@@ -20,7 +21,7 @@ interface Account {
 }
 
 const EnergyConsumptionAndBillGoalsChart = () => {
-    const { energyAccounts, modalIsOpen, setModalIsOpen } = useContext(MapContext);
+    const { energyAccounts, modalIsOpen, setModalIsOpen, editGoalModalIsOpen, setEditGoalModalIsOpen } = useContext(MapContext);
 
     const [data, setData] = useState<Account[]>([]);
     const [showMessage, setShowMessage] = useState(false);
@@ -57,7 +58,7 @@ const EnergyConsumptionAndBillGoalsChart = () => {
                 ) : showGoalMessage ? (
                     <div className="text-center text-red-500 max-w-lg m-auto pb-5">
                         <p className='py-4'>Algumas metas de consumo ou valor estão zeradas. Atualize as metas para visualizar o gráfico.</p>
-                        <Button Title='Editar metas' onClick={() => setModalIsOpen(!modalIsOpen)} />
+                        <Button Title='Editar metas' onClick={() => setEditGoalModalIsOpen(!editGoalModalIsOpen)} />
                         <Ilustration person='energy-goal' typeAnimation='fromTheBotton' />
                     </div>
                 ) : (
@@ -79,9 +80,9 @@ const EnergyConsumptionAndBillGoalsChart = () => {
                 )}
             </div>
 
-            {modalIsOpen && (
-                <Modal title="Editar Metas" onClose={() => setModalIsOpen(!modalIsOpen)}>
-                    <AccountForm />
+            {editGoalModalIsOpen && (
+                <Modal title="Editar Metas" onClose={() => {setEditGoalModalIsOpen(!editGoalModalIsOpen)}} visible={editGoalModalIsOpen}>
+                    <GoalForm />
                 </Modal>
             )}
         </>

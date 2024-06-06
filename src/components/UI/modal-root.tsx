@@ -8,19 +8,20 @@ interface ModalProps {
     children?: React.ReactNode
     subtitle?: string
     onClose?: () => void
+    visible: boolean
 }
 
-export const Modal = ({ children, title, subtitle, onClose }: ModalProps) => {
+export const Modal = ({ children, title, subtitle, onClose, visible }: ModalProps) => {
  
-    const {modalIsOpen, setModalIsOpen} = useContext(MapContext)
+    
 
     return (
-        <dialog className={`w-full h-full fixed bg-black bg-opacity-70 z-30 transition-all ease-in duration-300 top-0 left-0 ${modalIsOpen ? "" : "hidden"} flex items-center z-[999] !overflow-hidden`}>
+        <dialog className={`w-full h-full fixed bg-black bg-opacity-70 z-30 transition-all ease-in duration-300 top-0 left-0 ${visible ? "" : "hidden"} flex items-center z-[999] !overflow-hidden`}>
             <dialog className="transition-all py-3 text-black-custom bg-white m-auto rounded-2xl flex flex-col max-581:rounded-none min-581:max-h-[34.375rem] max-581:h-screen max-581:w-screen" style={{ zIndex: 50 }}>
                 <header className="w-full pb-3 flex border-b border-zinc-300">
                     <div style={{ width: 24 }} />
                     <h1 className="m-auto text-center font-semibold text-2xl text-black">{title}</h1>
-                    <button role="Fechar Modal" onClick={onClose ? onClose : () => setModalIsOpen(!modalIsOpen)}>
+                    <button role="Fechar Modal" onClick={onClose}>
                         <X size={24} weight="bold" style={{ marginRight: "12px" }} />
                     </button>
                 </header>

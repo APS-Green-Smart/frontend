@@ -10,13 +10,13 @@ import { Button } from '@/components/UI/Button';
 
 const AccountForm = () => {
 
-    const { accountType, user } = useContext(MapContext);
+    const { accountType, user, setModalIsOpen, modalIsOpen } = useContext(MapContext);
     const [date, setDate] = useState(new Date());
     const [consumption, setConsumption] = useState('');
     const [bill, setBill] = useState('');
 
-    const handleSubmit = (event: any) => {
-        event.preventDefault();
+    const handleSubmit = () => {
+        
 
         const formattedDate = date.toISOString();
 
@@ -42,10 +42,12 @@ const AccountForm = () => {
                     console.error('Error:', error);
                 });
         }
+
+        setModalIsOpen(!modalIsOpen)
     };
 
     return (
-        <form onSubmit={handleSubmit}>
+        <div>
              <label>Tipo de Conta: {accountType}</label>
             <div className='flex items-center justify-center'>
                 < Fieldset />
@@ -60,7 +62,6 @@ const AccountForm = () => {
                         dateFormat="yyyy-MM-dd"
                         showIcon
                         className='dark:bg-gray-200 w-full rounded-sm'
-                     
                     />
              
 
@@ -83,8 +84,8 @@ const AccountForm = () => {
                     state={true}
                 />
             </div>
-            <Button Title='Salvar Conta' />
-        </form>
+            <Button Title='Salvar Conta' onClick={handleSubmit}/>
+        </div>
     );
 };
 

@@ -48,6 +48,10 @@ interface DecodedToken {
       try {
         const decodedToken: DecodedToken = jwtDecode(token);
         return { email: decodedToken.sub, cnpj: decodedToken.cnpj };
+
+        
+
+
       } catch (error) {
         console.error('Failed to decode token:', error);
         return null;

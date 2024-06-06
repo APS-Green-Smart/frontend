@@ -15,8 +15,10 @@ export enum accountOpt {
 }
 
 interface User {
-   email: string;
-   cnpj: string;
+   id: string,
+   companyName: string,
+   cnpj: string,
+   email: string
 }
 
 interface DecodedToken {
@@ -37,42 +39,47 @@ export const MapProvider = ({ children }: MapProviderProps) => {
    const fetchUserData = async () => {
       const data = getUserInfo();
       if (data) {
-         setUser(data);
-         try {
-            const [responseWater, responseEnergy] = await Promise.all([
-               fetch("http://127.0.0.1:8080/account/water/list", {
-                  method: "POST",
-                  headers: {
-                     'Content-Type': 'application/json'
-                  },
-                  body: JSON.stringify({
-                     cnpjEnterprise: data.cnpj,
-                     includeGoals: true
-                  })
-               }),
-               fetch("http://127.0.0.1:8080/account/energy/list", {
-                  method: "POST",
-                  headers: {
-                     'Content-Type': 'application/json'
-                  },
-                  body: JSON.stringify({
-                     cnpjEnterprise: data.cnpj,
-                     includeGoals: true
-                  })
-               })
-            ]);
+         const response = await fetch(`http://127.0.0.1:8080/api/auth/getuser/${data.email}`);
+         const output: User = await response.json();
+         if (output) {
+            setUser(output);
 
-            if (!responseWater.ok || !responseEnergy.ok) {
-               throw new Error('Failed to fetch accounts');
+            try {
+               const [responseWater, responseEnergy] = await Promise.all([
+                  fetch("http://127.0.0.1:8080/account/water/list", {
+                     method: "POST",
+                     headers: {
+                        'Content-Type': 'application/json'
+                     },
+                     body: JSON.stringify({
+                        cnpjEnterprise: output.cnpj, // Usando output.cnpj
+                        includeGoals: true
+                     })
+                  }),
+                  fetch("http://127.0.0.1:8080/account/energy/list", {
+                     method: "POST",
+                     headers: {
+                        'Content-Type': 'application/json'
+                     },
+                     body: JSON.stringify({
+                        cnpjEnterprise: output.cnpj, // Usando output.cnpj
+                        includeGoals: true
+                     })
+                  })
+               ]);
+
+               if (!responseWater.ok || !responseEnergy.ok) {
+                  throw new Error('Failed to fetch accounts');
+               }
+
+               const waterAccounts = await responseWater.json();
+               const energyAccounts = await responseEnergy.json();
+
+               setWaterAccounts(waterAccounts);
+               setEnergyAccounts(energyAccounts);
+            } catch (error) {
+               console.error('Error fetching accounts:', error);
             }
-
-            const waterAccounts = await responseWater.json();
-            const energyAccounts = await responseEnergy.json();
-
-            setWaterAccounts(waterAccounts);
-            setEnergyAccounts(energyAccounts);
-         } catch (error) {
-            console.error('Error fetching accounts:', error);
          }
       }
    };
@@ -102,9 +109,10 @@ export const MapProvider = ({ children }: MapProviderProps) => {
 
    const [hasOpen, setHasOpen] = useState<boolean>(false);
    const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
+   const [editGoalModalIsOpen, setEditGoalModalIsOpen] = useState<boolean>(false);
 
    return (
-      <MapContext.Provider value={{modalIsOpen, setModalIsOpen, waterAccounts, energyAccounts, fetchUserData, isAuth, user, hasOpen, setHasOpen, accountType, setAccountType }}>
+      <MapContext.Provider value={{modalIsOpen, setModalIsOpen, editGoalModalIsOpen, setEditGoalModalIsOpen, waterAccounts, energyAccounts, fetchUserData, isAuth, user, hasOpen, setHasOpen, accountType, setAccountType }}>
          {children}
       </MapContext.Provider>
    );
