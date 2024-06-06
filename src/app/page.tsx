@@ -1,113 +1,83 @@
-import Image from 'next/image'
+import { Button } from "@/components/UI/Button"
+import { Article } from "../components/animations/animated-components/Article"
+import { Ilustration } from "../components/animations/animated-components/Ilustration"
+import Link from "next/link"
+// import WaterConsumptionChart from "./(public)/equipe/_components/teste"
+
+
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">src/app/page.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
+    <>
 
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 before:lg:h-[360px] z-[-1]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
+      <main className="max-md:min-h-[100dvh] md:min-h-[70vh] container m-auto flex flex-wrap items-center justify-center lg:pt-40 pt-20 lg:pb-20 pb-10 xl:flex-row xl:flex-nowrap xl:justify-evenly overflow-hidden">
+        <aside className="px-3 lg:px-8 py-5 pt-3 text-black-custom max-w-2xl min-[992px]:max-w-3xl  flex flex-col gap-5 md:py-10 xl:self-start xl:gap-10">
+          <h1 className="text-2xl font-bold md:text-5xl lg:text-6xl">Smart Green</h1>
+          <p className="text-lg py-5 md:text-xl">Ajudando empresas a reduzirem seu consumo e seus residuos de forma fácil e prática!</p>
+          <Link className="w-full" href={"#calculo"}>
+            <Button Title={"Saiba mais"} />
+          </Link>
+        </aside>
+        {/* < WaterConsumptionChart /> */}
+        <Ilustration person="hugo" typeAnimation="fromTheRight" />
+      </main>
 
-      <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Docs{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
 
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Learn{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
+      <section className="relative bg-black-custom skew-y-3">
+        <aside className="-skew-y-3 small-notbook:py-20 xl:py-40 container m-auto flex flex-wrap items-center justify-center xl:flex-row-reverse xl:flex-nowrap xl:justify-evenly">
+          <article className="text-white px-3 lg:px-8 pb-5 pt-20 md:max-w-2xl small-notbook:max-w-3xl xl:max-2xl">
+            <h2 className="text-2xl font-bold pb-5 md:text-3xl">Faça a diferença em suas viagens</h2>
+            <p className="text-lg py-5">
+              Uma aplicação com base no pilar ambiental do ESG, focada em auxiliar empresas e
+              todos aqueles dispostos a transformar sua gestão de resíduos hídricos e energéticos.
+              Por meio do monitoramento de dados, possibilitamos uma melhor tomada de decisão e
+              redução de riscos, garantindo práticas sustentáveis e transparência de consumo.</p>
+            <p className="text-lg py-5">
+              Clique no botão abaixo e experimente!
+            </p>
+            <fieldset className="w-full flex flex-col gap-5 pb-10 lg:flex-row">
+              <Link className="w-full" href={"#map"}>
+                <Button Title={"Minha rota"} />
+              </Link>
+            </fieldset>
+          </article>
+          <Ilustration person="julia" typeAnimation="fromTheLeft" />
+        </aside>
+      </section>
 
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Templates{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Explore starter templates for Next.js.
-          </p>
-        </a>
+      <section className="container m-auto relative flex items-center flex-col xl:flex-row xl:gap-5 pb-32 pt-20" id="calculo">
+        <Article />
+        <Ilustration person="math" typeAnimation="fromTheBotton" />
+      </section >
 
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Deploy{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
+      {/* <section className="min-h-screen relative bg-black-custom max-lg:py-10" id="map">
+        <section className="min-h-[100dvh] flex flex-col gap-10 relative  ">
+          <aside className="flex justify-center lg:py-8 xl:items-center px-3">
+            <aside className='w-full lg:max-w-4xl lg:px-3 lg:max-xl:m-auto '>
+              <MapNav />
+            </aside>
+            <figure className="max-lg:hidden lg:flex lg:justify-end lg:items-center">
+              <Ilustration person="allef" typeAnimation="fromTheBotton" />
+            </figure>
+          </aside>
+          <Map />
+          <figure className="px-3 flex flex-col items-center gap-8 lg:hidden ">
+            <Ilustration person="allef" typeAnimation="fromTheBotton" />
+          </figure>
+        </section>
+      </section> */}
+
+      {/* <section className="min-h-screen bg-default" id="info">
+        <aside className="container m-auto px-3 lg:px-8 pt-20">
+          <h2 className="text-2xl text-black-custom font-bold lg:pb-16">Confira as informações da sua rota</h2>
+          <RouteInfo />
+        </aside>
+
+        <aside className="container m-auto px-3 lg:px-8 pt-20">
+          <h2 className="text-2xl text-black-custom font-bold">O que seria necessário para repor o impacto?</h2>
+          <RouteImpact />
+        </aside>
+      </section> */}
+    </>
   )
 }
