@@ -39,14 +39,14 @@ const EnergyConsumptionAndBillChart = () => {
     <>
 
        
-        {showMessage ? (
+        {/* {showMessage ? (
           <div className="text-center text-red-500 max-w-lg m-auto pb-5">
             <p className='py-4'>É necessário pelo menos três contas para visualizar o gráfico.</p>
             <Button Title='Cadastrar conta' onClick={() => setModalIsOpen(!modalIsOpen)} />
             <Ilustration person='no-energy' typeAnimation='fromTheBotton' />
           </div>
         ) :
-          (
+          ( */}
             <>
   
               <ResponsiveContainer width="100%" height={400}>
@@ -62,7 +62,7 @@ const EnergyConsumptionAndBillChart = () => {
                 </BarChart>
               </ResponsiveContainer>
             </>
-          )}
+         
  
      
 

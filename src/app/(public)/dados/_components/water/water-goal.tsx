@@ -39,7 +39,6 @@ const WaterConsumptionAndBillGoalsChart = () => {
 
             const hasZeroGoals = waterAccounts.some(account => account.consumptionGoal === 0 || account.billGoal === 0);
             if (hasZeroGoals) {
-                alert(hasZeroGoals)
                 setShowGoalMessage(true);
             } else {
                 setShowGoalMessage(false);
@@ -50,7 +49,7 @@ const WaterConsumptionAndBillGoalsChart = () => {
     return (
         <>
             
-                {showMessage ? (
+                {/* {showMessage ? (
                     <div className="text-center text-red-500 max-w-lg m-auto pb-5">
                         <p className='py-4'>É necessário pelo menos três contas para visualizar o gráfico.</p>
                         <Button Title='Cadastrar conta' onClick={() => setModalIsOpen(!modalIsOpen)} />
@@ -62,7 +61,7 @@ const WaterConsumptionAndBillGoalsChart = () => {
                         <Button Title='Editar metas' onClick={() => setEditGoalModalIsOpen(!editGoalModalIsOpen)} />
                         <Ilustration person='water-goal' typeAnimation='fromTheBotton'/>
                     </div>
-                ) : (
+                ) : ( */}
                     <ResponsiveContainer width="100%" height={400}>
                         <LineChart data={data} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
                             <CartesianGrid strokeDasharray="3 3" />
@@ -76,7 +75,7 @@ const WaterConsumptionAndBillGoalsChart = () => {
                             <Line type="monotone" dataKey="billGoal" stroke="#d8ca9d" name="Meta de Valor (R$)" />
                         </LineChart>
                     </ResponsiveContainer>
-                )}
+               
             
             {editGoalModalIsOpen && (
                 <Modal title="Editar Metas" onClose={() => setEditGoalModalIsOpen(!editGoalModalIsOpen)} visible={editGoalModalIsOpen}>

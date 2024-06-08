@@ -4,6 +4,8 @@ import { useContext, useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import useAuth from '@/app/hooks/useAuth';
 import { MapContext } from '@/contexts/MapContext';
+import { InputFloatLabel } from '@/components/UI/input';
+import { Button } from '@/components/UI/Button';
 
 const Login = () => {
     const { isAuth, fetchUserData } = useContext(MapContext);
@@ -31,17 +33,16 @@ const Login = () => {
 
     return (
         <main className='w-full h-screen text-black flex flex-col items-center justify-center'>
-            <form onSubmit={handleLogin}>
-                <div>
-                    <label>Email</label>
-                    <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+            <div className='px-5 py-10 flex flex-col items-center bg-black-custom text-white rounded-3xl'>
+                <h1 className='font-semibold text-3xl py-3'>Login</h1>
+                <div className='flex'>
+                    <InputFloatLabel label='e-mail' type='email' state={true} onChange={(e) => setEmail(e.target.value)}/>
                 </div>
-                <div>
-                    <label>Password</label>
-                    <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+                <div className='flex py-3'>
+                    <InputFloatLabel label='senha' type='password' state={true} onChange={(e) => setPassword(e.target.value)}/>
                 </div>
-                <button type="submit">Login</button>
-            </form>
+                <Button onClick={handleLogin} Title='entrar'/>
+            </div>
         </main>
     );
 };

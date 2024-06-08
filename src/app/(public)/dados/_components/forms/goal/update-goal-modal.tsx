@@ -10,12 +10,12 @@ import { Button } from '@/components/UI/Button';
 
 const GoalForm = () => {
 
-    const { accountType, user, editGoalModalIsOpen, setEditGoalModalIsOpen } = useContext(MapContext);
+    const { accountType, user, editGoalModalIsOpen, setEditGoalModalIsOpen, fetchUserData, getAccounts} = useContext(MapContext);
     const [date, setDate] = useState(new Date());
     const [billGoal, setBillGoal] = useState('');
     const [goalConsu, setGoalConsu] = useState('');
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
        
         if (user) {
             const data = {
@@ -34,11 +34,19 @@ const GoalForm = () => {
                 body: JSON.stringify(data)
             }).then(async response => await response.json())
                 .then(data => {
+                   
                     setEditGoalModalIsOpen(!editGoalModalIsOpen)
                 }).catch((error) => {
-                    alert(error)
+                  
+                    setEditGoalModalIsOpen(!editGoalModalIsOpen)
                     console.error('Error:', error);
                 });
+
+                 
+        }
+
+        if (user) {
+            await getAccounts(user.cnpj)
         }
 
         

@@ -46,7 +46,7 @@ export const Sidenav = () => {
 
                 </ul>
                 <div>
-                    <Button Title="Sair" onClick={() => {logout; location.reload();}} />
+                    <Button Title="Sair" onClick={() => {localStorage.clear(); location.reload();}} />
                 </div>
             </aside>
         </nav>

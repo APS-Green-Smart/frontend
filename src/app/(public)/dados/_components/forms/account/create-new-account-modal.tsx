@@ -10,7 +10,7 @@ import { Button } from '@/components/UI/Button';
 
 const AccountForm = () => {
 
-    const { accountType, user, setModalIsOpen, modalIsOpen } = useContext(MapContext);
+    const { accountType, user, setModalIsOpen, modalIsOpen, fetchUserData } = useContext(MapContext);
     const [date, setDate] = useState(new Date());
     const [consumption, setConsumption] = useState('');
     const [bill, setBill] = useState('');
@@ -38,11 +38,14 @@ const AccountForm = () => {
             }).then(response => response.json())
                 .then(data => {
                     console.log('Success:', data);
+                    fetchUserData()
                 }).catch((error) => {
+                    fetchUserData()
                     console.error('Error:', error);
                 });
         }
 
+        fetchUserData()
         setModalIsOpen(!modalIsOpen)
     };
 

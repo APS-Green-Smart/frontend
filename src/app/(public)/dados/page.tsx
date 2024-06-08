@@ -12,12 +12,20 @@ import EnergyConsumptionAndBillChart from "./_components/energy/energy-bill"
 import { Modal } from "@/components/UI/modal-root"
 import AccountForm from "./_components/forms/account/create-new-account-modal"
 import { MapContext } from "@/contexts/MapContext"
-import { useContext } from "react"
+import { useContext, useEffect } from "react"
 import GoalForm from "./_components/forms/goal/update-goal-modal"
 
 export default function Dados() {
 
-    const { modalIsOpen, setModalIsOpen, editGoalModalIsOpen, setEditGoalModalIsOpen } = useContext(MapContext);
+    const { modalIsOpen, setModalIsOpen, editGoalModalIsOpen, setEditGoalModalIsOpen, fetchUserData } = useContext(MapContext);
+
+    useEffect(() => {
+
+        fetchUserData()
+
+    }, [])
+
+
 
     return (
         <>
@@ -58,13 +66,13 @@ export default function Dados() {
                 </aside>
             </section>
 
-            
+
             {editGoalModalIsOpen && (
-             
-                <Modal title="Editar meta" onClose={() => {setEditGoalModalIsOpen(!editGoalModalIsOpen)}} visible={editGoalModalIsOpen}>
+
+                <Modal title="Editar meta" onClose={() => { setEditGoalModalIsOpen(!editGoalModalIsOpen) }} visible={editGoalModalIsOpen}>
                     <GoalForm />
                 </Modal>
-        
+
             )}
 
 
@@ -73,7 +81,7 @@ export default function Dados() {
                     <AccountForm />
                 </Modal>
             )}
- 
+
         </>
     )
 }

@@ -38,13 +38,13 @@ const WaterConsumptionAndBillChart = () => {
   return (
     <>
     
-        {showMessage ? (
+        {/* {showMessage ? (
           <div className="text-center text-red-500 max-w-lg m-auto pb-5">
             <p className='py-4'>É necessário pelo menos três contas para visualizar o gráfico.</p>
             <Button Title='Cadastrar conta' onClick={() => setModalIsOpen(!modalIsOpen)} />
             <Ilustration person='no-water' typeAnimation='fromTheBotton' />
           </div>
-        ) : (
+        ) : ( */}
           
             <ResponsiveContainer width="100%" height={400}>
               <BarChart data={data} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
@@ -58,8 +58,7 @@ const WaterConsumptionAndBillChart = () => {
                 <Bar yAxisId="right" dataKey="bill" fill="#82ca9d" name="Valor da Conta (R$)" />
               </BarChart>
             </ResponsiveContainer>
-         
-        )}
+        
       
 
       {modalIsOpen && (

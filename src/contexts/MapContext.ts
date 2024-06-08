@@ -35,6 +35,7 @@ interface MapValues {
     setModalIsOpen: Dispatch<SetStateAction<boolean>>
     editGoalModalIsOpen: boolean
     setEditGoalModalIsOpen: Dispatch<SetStateAction<boolean>>
+    getAccounts: (cnpj: string) => void
 }
 
 

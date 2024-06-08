@@ -49,7 +49,7 @@ const EnergyConsumptionAndBillGoalsChart = () => {
     return (
         <>
             <div>
-                {showMessage ? (
+                {/* {showMessage ? (
                     <div className="text-center text-red-500 max-w-lg m-auto pb-5">
                         <p className='py-4'>É necessário pelo menos três contas para visualizar o gráfico.</p>
                         <Button Title='Cadastrar conta' onClick={() => setModalIsOpen(!modalIsOpen)} />
@@ -62,7 +62,7 @@ const EnergyConsumptionAndBillGoalsChart = () => {
                         <Ilustration person='energy-goal' typeAnimation='fromTheBotton' />
                     </div>
                 ) : (
-                    <>
+                   */}
                         <ResponsiveContainer width="100%" height={400}>
                             <LineChart data={data} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
                                 <CartesianGrid strokeDasharray="3 3" />
@@ -76,8 +76,8 @@ const EnergyConsumptionAndBillGoalsChart = () => {
                                 <Line type="monotone" dataKey="billGoal" stroke="#d8ca9d" name="Meta de Valor (R$)" />
                             </LineChart>
                         </ResponsiveContainer>
-                    </>
-                )}
+                
+                
             </div>
 
             {editGoalModalIsOpen && (
